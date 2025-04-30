@@ -1,5 +1,5 @@
 import bookLogo from './assets/books.png'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, Route, Routes } from 'react-router-dom'
 import Home from './components/Home'
 import Books from './components/Books'
@@ -10,7 +10,14 @@ import Account from './components/Account'
 
 
 function App() {
-  const [token, setToken] = useState(null)
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
 
   return (
     <>
@@ -25,15 +32,15 @@ function App() {
           <Link to="/books"> Library Catalogue </Link>
           <Link to="/users/register"> Register </Link>
           <Link to="/users/login"> Log In </Link>
-          <Link to="/users/me"> Account </Link>
+          {token? <Link to="/users/me"> Account </Link> : null}
         </div>
         <div>
           <Routes>
             <Route path="/" element={<Home/>} />
             <Route path="/books" element={<Books/>} />
             <Route path="/books/:id" element={<SingleBook/>} />
-            <Route path="/users/register" element={<Register/>} />
-            <Route path="users/login" element={<Login/>} />
+            <Route path="/users/register" element={<Register token={token} setToken={setToken}/>} />
+            <Route path="users/login" element={<Login token={token} setToken={setToken} />} />
             <Route path="users/me" element={<Account/>} />
           </Routes>
         </div>
