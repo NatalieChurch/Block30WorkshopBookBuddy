@@ -9,8 +9,10 @@ import Login from './components/Login'
 import Account from './components/Account'
 
 
+
 function App() {
   const [token, setToken] = useState(null);
+  const [books, setBooks] = useState([]);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -18,6 +20,17 @@ function App() {
       setToken(storedToken);
     }
   }, []);
+
+  // useEffect(()=> {
+  //   const getBooks = async () => {
+  //     const res = await fetch ("https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books")
+  //     const data = await res.json()
+  //     console.log(data)
+  //     setBooks(data)
+  //   }
+  //   getBooks();
+  //   console.log("First UseEffect")
+  // }, []);
 
   return (
     <>
