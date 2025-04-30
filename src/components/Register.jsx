@@ -27,7 +27,12 @@ async function handleSubmit(event) {
             console.log(result);
             setToken(result.token);
 
+            localStorage.setItem("email", username);
+            localStorage.setItem("password", password);
             localStorage.setItem("token", result.token);
+
+            setUsername("");
+            setPassword("");
 
     } catch (error){
         setError(error.message)
