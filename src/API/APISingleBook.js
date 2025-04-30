@@ -5,7 +5,7 @@ export const fetchSingleBook = async (id) => {
       const res = await fetch(`${API}/${id}`)
       const data = await res.json()
         
-      return(data.data)
+      return(data)
     } catch (err) {
       console.error(`Oh no, trouble fetching the book!`, err);
     }

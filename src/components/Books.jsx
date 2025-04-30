@@ -21,7 +21,7 @@ function Books ({setReservedBook, setCheckoutBook, token}) {
         setCheckoutBook(books.id);
     }
 
-    const handleReserve = () => {
+    const handleReserve = (books) => {
         if (!token) return (<p>Please log in to reserve a book!</p>)
         setReservedBook(books.id);
     }
@@ -32,12 +32,10 @@ function Books ({setReservedBook, setCheckoutBook, token}) {
     <div>
         {   books &&
             books.map((books) =>
-                <div key={books.id} id="bookDisplay">
+                <div key={books.id} id="allBookDisplay">
                     <h1>{books.title}</h1>
                     <h2>{books.author}</h2>
                     <img src={books.coverimage} />
-                    <h3>{books.description}</h3>
-                    <h3>{books.available}</h3>
 
                     <button onClick={()=>handleCheckout(books.id)}>Check out this Book</button>
                     <button onClick={()=>handleReserve(books.id)}>Reserve this Book</button>
