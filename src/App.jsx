@@ -30,8 +30,9 @@ function App() {
         <div id="navBar" style={{display:"flex", justifyContent:"space-between"}}>
           <Link to="/"> Home </Link>
           <Link to="/books"> Library Catalogue </Link>
-          <Link to="/users/register"> Register </Link>
-          <Link to="/users/login"> Log In </Link>
+          {!token && <Link to="/users/register"> Register </Link>}
+          {!token && <Link to="/users/login"> Log In </Link>}
+  {/* Make sure the conditional rendering of the two lines above is correct */}
           {token? <Link to="/users/me"> Account </Link> : null}
         </div>
         <div>
