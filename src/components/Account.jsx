@@ -1,10 +1,33 @@
 /* TODO - add your code to create a functional React component that renders account details for a logged in user. Fetch the account data from the provided API. You may consider conditionally rendering a message for other users that prompts them to log in or create an account.  */
-
+import { useEffect, useState } from 'react';
 
 function Account () {
 
 const email = localStorage.getItem("email");
-const password = localStorage.getItem("password")
+const password = localStorage.getItem("password");
+const token = localStorage.getItem("token");
+const [userInfo, setUserInfo] = useState(null);
+
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            try {
+                const res = await fetch ("https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/me", {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
+
+                const data = await res.json();
+                console.log("User data response:", data)
+                setUserInfo(data);
+
+            } catch(err) {
+                console.error(err)
+            }
+        };
+        fetchUserInfo();
+    }, []);
 
     return(
 
@@ -13,6 +36,26 @@ const password = localStorage.getItem("password")
             <h2>Your Account Details:</h2>
             <h3>Email: {email}</h3>
             <h3>Password: {password}</h3>
+
+        {userInfo && (
+            <>
+            
+            <h2>You have checked out:</h2>
+                <ul>
+                    {userInfo.checkedOutBooks?.map(book => (
+                        <li key={book.id}>{book.title}</li>
+                    ))};
+                </ul>
+
+            <h2>You have reserved:</h2>
+                <ul>
+                    {userInfo.reservations?.map(book => (
+                        <li key={book.id}>{book.title}</li>
+                    ))};
+                </ul>
+            </>
+        )};
+
     </div>)
 }
 

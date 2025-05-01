@@ -24,12 +24,64 @@ function SingleBook () {
             getBook();
     }, [id]);
 
-    const handleCheckout = (bookId) => {
-        console.log("Checkout clicked for this book");
+    const handleCheckout = async (bookId) => {
+        console.log("Checkout clicked for this book")
+        if (!book.available) {
+            alert ("Book is checked out. Please reserve it to read it next!");
+            return;
+        }
+        try {
+            const res = await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books/${bookId}/reservations`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+
+            const responseData = await res.json()
+            console.log("API res:", responseData)
+
+            if (!res.ok) throw new Error(responseData.message || "Failed to check out this book.");
+
+        if (book.available) {
+            alert ("Successfully checked out the book!");
+            return;
+        }
+
+            const checkedOut = JSON.parse(localStorage.getItem("checkedOutBooks"));
+            const updated = [...checkedOut, { id: book.id, title: book.title, author: book.author }];
+            localStorage.setItem("checkedOutBooks", JSON.stringify(updated)); 
+
+            setBook({ ...book, available: false });
+        } catch (err) {
+            console.error(err);
+            alert ("Checkout was not possible.")
+        }
     };
 
-    const handleReserve = (bookId) => {
+    const handleReserve = async (bookId) => {
         console.log("Reserve clicked for this book");
+        if (book.available) {
+            alert ("You may check out this book rather than reserving it!");
+        }
+        try {
+            const res = await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books/${bookId}/reservations`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+
+            if (!book.available) {
+                alert ("Successfully reserved this book!");
+            }
+            
+        } catch(err) {
+            console.error(err);
+            alert ("Reserving was not possible.")
+        }
     };
 
     return (
@@ -38,7 +90,7 @@ function SingleBook () {
                     <div key={book.id} id="singleBookDisplay">
                         <h1>{book.title}</h1>
                         <h2>{book.author}</h2>
-                        <img src={book.coverimage} alt={book.title}/>
+                        <img  style={{height:"400px"}} src={book.coverimage} alt={book.title}/>
                         <h3>{book.description}</h3>
                         <h3>{book.available? "Available" : "Checked Out"}</h3>
                 

@@ -16,16 +16,6 @@ function Books ({setReservedBook, setCheckoutBook, token}) {
         apiCall();
     }, []);
 
-    const handleCheckout = (books) => {
-        if (!token) return (<p>Please log in to check out a book!</p>)
-        setCheckoutBook(books.id);
-    }
-
-    const handleReserve = (books) => {
-        if (!token) return (<p>Please log in to reserve a book!</p>)
-        setReservedBook(books.id);
-    }
-
     console.log(books)
 
    return (
@@ -35,11 +25,7 @@ function Books ({setReservedBook, setCheckoutBook, token}) {
                 <div key={books.id} id="allBookDisplay">
                     <h1>{books.title}</h1>
                     <h2>{books.author}</h2>
-                    <img src={books.coverimage} />
-
-                    <button onClick={()=>handleCheckout(books.id)}>Check out this Book</button>
-                    <button onClick={()=>handleReserve(books.id)}>Reserve this Book</button>
-                        {/* Make two buttons above functional, and ensure below button redirects properly */}
+                    <img style={{height:"300px"}} src={books.coverimage} alt={`${books.title} cover`} />
                     <button onClick={()=>navigate(`/books/${books.id}`)}>See Book Details</button>
 
                 </div>

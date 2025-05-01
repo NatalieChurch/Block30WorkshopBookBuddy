@@ -40,7 +40,7 @@ function App() {
 
       <p>You may need to use the `token` in this top-level component in other components that need to know if a user has logged in or not.</p> */}
 
-        <div id="navBar" style={{display:"flex", justifyContent:"space-between"}}>
+        <div id="navBar" style={{display:"flex", justifyContent:"space-between", padding: "10%"}}>
           <Link to="/"> Home </Link>
           <Link to="/books"> Library Catalogue </Link>
           {!token && <Link to="/users/register"> Register </Link>}
