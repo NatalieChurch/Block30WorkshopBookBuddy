@@ -3,23 +3,51 @@ import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { fetchAllBooks } from "../API/API";
 
-function Books ({setReservedBook, setCheckoutBook, token}) {
+function Books () {
 
     const [books, setBooks] = useState([])
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filteredResults, setFilteredResults] = useState([]);
     const navigate = useNavigate();
 
     useEffect (() => {
         const apiCall = async () => {
             const res = await fetchAllBooks()
             setBooks(res)
+            setFilteredResults(res);
         }
         apiCall();
     }, []);
 
-    console.log(books)
+    useEffect(() => {
+        if (searchTerm.trim() === "") {
+            setFilteredResults([]);
+        } else {
+        const lowerSearch = searchTerm.toLowerCase();
+        const filtered = books.filter(book =>
+            book.title.toLowerCase().includes(lowerSearch)
+        );
+        setFilteredResults(filtered);
+        }
+    }, [searchTerm, books]);
 
    return (
     <div>
+        <div className="searchBar">
+            <h1>Search for a Book</h1>
+            <input
+                id = "searchInput"
+                type = "text"
+                placeholder = "Enter search term"
+                value = {searchTerm}
+                onChange = {e => setSearchTerm(e.target.value)}
+            />
+            <div id="searchResults">
+                {filteredResults.map(book => (
+                    <h3 key={book.id}>{book.title}</h3>
+                ))}
+            </div>
+        </div>
         {   books &&
             books.map((books) =>
                 <div key={books.id} id="allBookDisplay">
