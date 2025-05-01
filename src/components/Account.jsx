@@ -1,14 +1,19 @@
 // /* TODO - add your code to create a functional React component that renders account details for a logged in user. Fetch the account data from the provided API. You may consider conditionally rendering a message for other users that prompts them to log in or create an account.  */
 
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Account () {
     const email = localStorage.getItem("email");
     const password = localStorage.getItem("password");
     const token = localStorage.getItem("token");
     const [userInfo, setUserInfo] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
+        if (!token) {
+            navigate("/login")
+        } else {
         const fetchUserInfo = async () => {
             try {
                 const res = await fetch("https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/users/me", {
@@ -26,7 +31,8 @@ function Account () {
             }
         };
         fetchUserInfo();
-    }, []);
+    }
+    }, [token, navigate]);
 
     const handleReturn = async (bookId) => {
         try {
@@ -45,7 +51,18 @@ function Account () {
             console.error(err);
             alert("Cannot return this book. Please talk to a librarian.");
         }
+
     };
+
+  const handleLogout = () => {
+            localStorage.removeItem("token");
+            localStorage.removeItem("email");
+            localStorage.removeItem("password");
+
+            navigate("/");
+
+            window.location.reload();
+        };
 
     return (
         <div>
@@ -69,6 +86,9 @@ function Account () {
                     </div>
                 </>
             )}
+
+            <button onClick={handleLogout}>Logout</button>
+
         </div>
     );
 }

@@ -1,11 +1,13 @@
 /* TODO - add your code to create a functional React component that renders a registration form */
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 function Register ({setToken}) {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
 
 async function handleSubmit(event) {
@@ -33,6 +35,10 @@ async function handleSubmit(event) {
 
             setUsername("");
             setPassword("");
+
+            navigate("/");
+            window.location.reload();
+            alert("Congrats, you've registered!");
 
     } catch (error){
         setError(error.message)
