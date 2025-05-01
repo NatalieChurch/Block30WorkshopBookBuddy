@@ -15,7 +15,6 @@ function SingleBook () {
         const getBook = async () => {
             try {
                 const data = await fetchSingleBook(id);
-                console.log(data);
                 setBook(data);
             } catch (err) {
                 console.error(err)
@@ -25,7 +24,7 @@ function SingleBook () {
     }, [id]);
 
     const handleCheckout = async (bookId) => {
-        console.log("Checkout clicked for this book")
+
         if (!book.available) {
             alert ("Book is checked out. You or someone else has reserved it.");
             return;
@@ -41,11 +40,6 @@ function SingleBook () {
                     bookId
                 })
             });
-
-            const responseData = await res.json()
-            console.log("API res:", responseData)
-
-            if (!res.ok) throw new Error(responseData.message || "Failed to check out this book.");
 
         if (book.available) {
             alert ("Successfully checked out the book!");
@@ -63,8 +57,6 @@ function SingleBook () {
         }
     };
 
-    
-
     return (
         <div>
             {book && (
@@ -81,7 +73,7 @@ function SingleBook () {
                         <button onClick={()=>handleCheckout(book.id)}>Check out or Reserve this Book</button>
                     </>
                         )}
-                            {/* Make two buttons above functional, and ensure below button redirects properly */}
+
                         <button onClick={()=>navigate(`/books`)}>Go Back</button>
     
                     </div>
