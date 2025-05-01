@@ -39,22 +39,15 @@ const [userInfo, setUserInfo] = useState(null);
 
         {userInfo && (
             <>
-            
-            <h2>You have checked out:</h2>
-                <ul>
-                    {userInfo.checkedOutBooks?.map(book => (
-                        <li key={book.id}>{book.title}</li>
-                    ))};
-                </ul>
 
-            <h2>You have reserved:</h2>
+            <h2>You have checked out or reserved:</h2>
                 <ul>
                     {userInfo.reservations?.map(book => (
                         <li key={book.id}>{book.title}</li>
-                    ))};
+                    ))}
                 </ul>
             </>
-        )};
+        )}
 
     </div>)
 }

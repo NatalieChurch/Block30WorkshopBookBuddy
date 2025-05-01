@@ -27,16 +27,19 @@ function SingleBook () {
     const handleCheckout = async (bookId) => {
         console.log("Checkout clicked for this book")
         if (!book.available) {
-            alert ("Book is checked out. Please reserve it to read it next!");
+            alert ("Book is checked out. You or someone else has reserved it.");
             return;
         }
         try {
-            const res = await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books/${bookId}/reservations`, {
+            const res = await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/reservations`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
-                }
+                },
+                body: JSON.stringify({
+                    bookId
+                })
             });
 
             const responseData = await res.json()
@@ -60,29 +63,7 @@ function SingleBook () {
         }
     };
 
-    const handleReserve = async (bookId) => {
-        console.log("Reserve clicked for this book");
-        if (book.available) {
-            alert ("You may check out this book rather than reserving it!");
-        }
-        try {
-            const res = await fetch(`https://fsa-book-buddy-b6e748d1380d.herokuapp.com/api/books/${bookId}/reservations`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                }
-            });
-
-            if (!book.available) {
-                alert ("Successfully reserved this book!");
-            }
-            
-        } catch(err) {
-            console.error(err);
-            alert ("Reserving was not possible.")
-        }
-    };
+    
 
     return (
         <div>
@@ -97,8 +78,7 @@ function SingleBook () {
 
                 {token && (
                     <>
-                        <button onClick={()=>handleCheckout(book.id)}>Check out this Book</button>
-                        <button onClick={()=>handleReserve(book.id)}>Reserve this Book</button>
+                        <button onClick={()=>handleCheckout(book.id)}>Check out or Reserve this Book</button>
                     </>
                         )}
                             {/* Make two buttons above functional, and ensure below button redirects properly */}
