@@ -58,9 +58,9 @@ function SingleBook () {
     };
 
     return (
-        <div>
+        <div style={{paddingBottom: "100px"}}>
             {book && (
-                    <div key={book.id} id="singleBookDisplay" style={{paddingBottom: "50px"}}>
+                    <div key={book.id} id="singleBookDisplay" >
                         <h1>{book.title}</h1>
                         <h2>{book.author}</h2>
                         <img  className="imgClass" style={{height:"400px"}} src={book.coverimage} alt={book.title}/>

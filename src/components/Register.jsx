@@ -46,7 +46,7 @@ async function handleSubmit(event) {
 }
 
 return(
-    <div style={{paddingBottom: "50px"}}>
+    <div style={{paddingBottom: "100px"}}>
         <h2>Register Now!</h2>
         {error && <p>{error}</p>}
         <form onSubmit={handleSubmit}>

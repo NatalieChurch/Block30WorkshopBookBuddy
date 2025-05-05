@@ -34,7 +34,7 @@ function Login({ setToken }) {
   }
 
   return (
-    <div style={{paddingBottom: "50px"}}>
+    <div style={{paddingBottom: "100px"}}>
       <h2>Login</h2>
       {error && <p>{error}</p>}
       <form onSubmit={handleLogin}>

@@ -65,7 +65,7 @@ function Account () {
         };
 
     return (
-        <div style={{paddingBottom: "50px"}}>
+        <div style={{paddingBottom: "100px"}}>
             <h1> Welcome to Your Account Page! </h1>
             <h2>Your Account Details:</h2>
             <h3>Email: {email}</h3>

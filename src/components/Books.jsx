@@ -32,7 +32,7 @@ function Books () {
     }, [searchTerm, books]);
 
    return (
-    <div>
+    <div style={{paddingBottom: "100px"}}>
         <div className="searchBar">
             <h1>Search for a Book</h1>
             <input
@@ -50,7 +50,7 @@ function Books () {
         </div>
         {   books &&
             books.map((books) =>
-                <div key={books.id} id="allBookDisplay" style={{paddingBottom: "50px"}}>
+                <div key={books.id} id="allBookDisplay">
                     <h1>{books.title}</h1>
                     <h2>{books.author}</h2>
                     <img className="imgClass" style={{height:"300px"}} src={books.coverimage} alt={`${books.title} cover`} />
