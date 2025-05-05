@@ -25,7 +25,6 @@ async function handleSubmit(event) {
             })
 
             const result = await response.json()
-            console.log(result);
             setToken(result.token);
 
             localStorage.setItem("email", username);
