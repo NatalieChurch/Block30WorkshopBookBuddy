@@ -1,5 +1,5 @@
-
 function Footer () {
+    
     return (
         <footer className="footer">
            <p>Follow us on social media!</p>

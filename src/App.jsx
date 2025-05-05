@@ -10,10 +10,8 @@ import Account from './components/Account'
 import Footer from './components/Footer'
 
 
-
 function App() {
   const [token, setToken] = useState(null);
-  const [books, setBooks] = useState([]);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
