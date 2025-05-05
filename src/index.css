@@ -37,6 +37,10 @@ button {
   margin-left: 3%;
 }
 
+#loginButton {
+  background-color: #fce6b8
+}
+
 input {
   padding-left: 5px;
   padding-right: 50%;

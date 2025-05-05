@@ -60,7 +60,7 @@ function Login({ setToken }) {
             required
           />
         </div>
-        <button type="submit">Submit!</button>
+        <button type="submit" id="loginButton">Submit!</button>
       </form>
     </div>
   );
