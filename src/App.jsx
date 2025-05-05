@@ -7,6 +7,7 @@ import SingleBook from './components/SingleBook'
 import Register from './components/Register'
 import Login from './components/Login'
 import Account from './components/Account'
+import Footer from './components/Footer'
 
 
 
@@ -23,8 +24,8 @@ function App() {
 
   return (
     <>
-      <h1><img id='logo-image' src={bookLogo}/>Book Buddy Library App</h1>
-
+        <h1><img id='logo-image' src={bookLogo}/>Book Buddy Library App</h1>
+        
         <div id="navBar" style={{display:"flex", justifyContent:"space-between", padding: "10%"}}>
           <Link to="/"> Home </Link>
           <Link to="/books"> Library Catalogue </Link>
@@ -33,6 +34,7 @@ function App() {
 
           {token? <Link to="/users/me"> Account </Link> : null}
         </div>
+
         <div>
           <Routes>
             <Route path="/" element={<Home/>} />
@@ -41,8 +43,14 @@ function App() {
             <Route path="/users/register" element={<Register token={token} setToken={setToken}/>} />
             <Route path="users/login" element={<Login token={token} setToken={setToken} />} />
             <Route path="users/me" element={<Account/>} />
-          </Routes>
+          </Routes>  
         </div>
+
+        <div>
+          <Footer/>
+        </div>
+
+
     </>
   )
 }

@@ -50,10 +50,10 @@ function Books () {
         </div>
         {   books &&
             books.map((books) =>
-                <div key={books.id} id="allBookDisplay">
+                <div key={books.id} id="allBookDisplay" style={{paddingBottom: "50px"}}>
                     <h1>{books.title}</h1>
                     <h2>{books.author}</h2>
-                    <img style={{height:"300px"}} src={books.coverimage} alt={`${books.title} cover`} />
+                    <img className="imgClass" style={{height:"300px"}} src={books.coverimage} alt={`${books.title} cover`} />
                     <button onClick={()=>navigate(`/books/${books.id}`)}>See Book Details</button>
 
                 </div>

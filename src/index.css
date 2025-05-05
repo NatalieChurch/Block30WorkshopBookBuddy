@@ -1,13 +1,68 @@
 body {
   font-family: Georgia, serif;
-  background-color: #f8f8f8;
+  background-color:rgb(218, 199, 247);
   margin: 0;
   padding: 0;
 }
 
 #logo-image {
-  width: 30px;
+  width: 35px;
   margin-right: 10px;
 }
 
-/* Add your own custom styles here */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.imgClass {
+  border: 4px, rgb(91, 61, 126), solid;
+  width: 200px;
+}
+
+h1, h2, h3, button {
+  font-family: Cambria, Cochin, Georgia, serif;
+}
+
+button {
+  background-color: #fce6b8;
+  border: 3px, solid, rgb(255, 181, 71);
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin-right: 3%;
+  margin-left: 3%;
+}
+
+input {
+  padding-left: 5px;
+  padding-right: 50%;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  display: flex;
+  text-overflow: ellipsis;
+  width: 40%;
+  margin-bottom: 15px;
+}
+
+#navbar {
+  padding: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.footer {
+  background-color: #92c6e9;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  position: fixed;
+  padding: 5px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+}

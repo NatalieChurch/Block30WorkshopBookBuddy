@@ -65,7 +65,7 @@ function Account () {
         };
 
     return (
-        <div>
+        <div style={{paddingBottom: "50px"}}>
             <h1> Welcome to Your Account Page! </h1>
             <h2>Your Account Details:</h2>
             <h3>Email: {email}</h3>
@@ -79,7 +79,7 @@ function Account () {
                             <div key={book.id}>
                                 <h3>{book.title}</h3>
                                 <h3>{book.author}</h3>
-                                <img style={{ height: "100px" }} src={book.coverimage} alt={book.title} />
+                                <img className="imgClass" style={{ height: "100px" }} src={book.coverimage} alt={book.title} />
                                 <button onClick={() => handleReturn(book.id)}>Return this Book</button>
                             </div>
                         ))}
